@@ -11,13 +11,13 @@ const count = ref(0)
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
+    <p class="text-[red]">
+      Edit de ahua 
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
   </div>
 
-  <p>
+  <p class="text-[red]">
     Check out
     <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
       >create-vue</a
