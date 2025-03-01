@@ -1,7 +1,6 @@
 import { createApp } from "vue";
-import "@/assets/styles/style.css";
-import "@/assets/styles/tailwind.scss";
 import { setupRouter } from "./router";
+import "@/assets/styles/index.scss";
 import App from "./App.vue";
 
 const app = createApp(App);
