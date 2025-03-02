@@ -1,40 +1,49 @@
 <template>
   <div class="container">
-   <van-nav-bar
+    <van-nav-bar
       title="首展客服"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
     />
 
-
-   <!-- S 内容显示区 -->
-   <div class="content">
-
-   </div>
-   <!-- E 内容显示区 -->
-
-   <!-- S 操作区 -->
-   <div class="operator">
-    <div class="chant-input">
-      <textarea
-        v-model="message"
-        rows="1"
-        placeholder="输入消息，Shift + Enter 换行"
-        @keydown="handleKeydown"
-        :disabled="loading"
-      />
+    <!-- S 内容显示区 -->
+    <div class="content">
+      
+      <!-- 内容区域 -->
     </div>
-   </div>
-   <!-- E 操作区 -->
+    <!-- E 内容显示区 -->
+
+    <!-- S 操作区 -->
+    <div class="operator box-border">
+      <div class="chant-input box-border">
+        <van-field
+          class="message-input"
+          v-model="message"
+          rows="1"
+          autosize
+          type="textarea"
+          placeholder="给first-ai发送消息"
+          @input="handleInput"
+        />
+      </div>
+      <div class="send flex items-center justify-between">
+        <div></div>
+        <div class="send-btn flex items-center justify-center" @click="send">
+          <van-icon name="guide-o" color="#fff" />
+        </div>
+      </div>
+    </div>
+    <!-- E 操作区 -->
   </div>
 </template>
 
-<script setup lang='ts'>
-
+<script setup lang="ts">
 // 消息
-const message = ref('')
+const message = ref("");
+
 </script>
+
 <style lang="scss" scoped>
-  @use './index';
+@import './index.scss';
 </style>

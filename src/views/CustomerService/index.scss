@@ -1,9 +1,11 @@
 .container {
-  $operator-height: 44px;
+  $operator-height: 80px;
   $header-height: 44px;
-  $content-height: calc(100vh - 44px - 44px);
+  $content-height: calc(100vh - 44px - 100px);
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
   background-color: #f2f2f2;
 
   .header {
@@ -17,11 +19,64 @@
 
   .content {
     height: $content-height;
+    overflow-y: auto;
   }
 
   .operator {
-    height: $operator-height;
+    padding: 10px 16px;
+    width: 100%;
+    min-height: $operator-height;
+    max-height: auto;
     background-color: #f2f2f2;
     border-top: 1px solid #eee;
+
+    .chant-input {
+      padding: 0 12px;
+      border-radius: 1rem;
+      background-color: $gray-4;
+      border: 1px solid #e2e8f0;
+      max-height: 100px;
+      overflow: hidden;
+      position: relative;
+
+      .message-input {
+        width: 100%;
+        min-height: 40px;
+        max-height: 100px;
+        background-color: $gray-4;
+        border: none;
+        outline: none;
+        resize: none;
+        overflow: auto;
+        padding: 8px;
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+
+        &:empty::before {
+          content: attr(placeholder);
+          color: #a9a9a9;
+          display: block;
+        }
+      }
+    }
+
+    .send {
+      margin-top: 10px;
+      width: 100%;
+
+      .send-btn {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+        background-color: $red;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 16px;
+        display: flex;
+      }
+    }
   }
 }
