@@ -9,6 +9,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AiMeaasge: typeof import('./src/components/h5Components/Message/AiMeaasge.vue')['default']
+    AiMessage: typeof import('./src/components/h5Components/Message/AiMessage.vue')['default']
+    AiMesssge: typeof import('./src/components/h5Components/Message/AiMesssge.vue')['default']
+    ChatToolbar: typeof import('./src/components/h5Components/ChatToolbar/index.vue')['default']
     copy: typeof import('./src/components/h5Components/Message/AiMeaasge copy.vue')['default']
     FaTextarea: typeof import('./src/components/base/fa-textarea/index.vue')['default']
     FsTextarea: typeof import('./src/components/base/FsTextarea/index.vue')['default']

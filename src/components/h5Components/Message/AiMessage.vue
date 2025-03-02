@@ -1,10 +1,27 @@
 <template>
-  <div class="message-group user">
-    <div class="avatar">
-      <Icon icon="solar:user-bold" width="16" />
+  <div class="message-group">
+    <div class="avatar" :class="{ 'animate-pulse': loading }">
+      <Icon 
+        v-if="!loading"
+        icon="fluent:bot-24-filled"
+        width="16" 
+      />
+      <Icon 
+        v-else
+        icon="svg-spinners:pulse-3" 
+        class="text-blue-500"
+        width="16" 
+      />
     </div>
     <div class="message">
-      <div class="message-content">
+      <div v-if="loading" class="message-content loading">
+        <span class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div v-else class="message-content">
         <div class="markdown-body" v-html="formattedContent" />
       </div>
       <span class="time">{{ time }}</span>
@@ -35,17 +52,25 @@ const formattedContent = computed(() => {
   return props.content
 });
 
+/**
+ * 复制消息内容到剪贴板
+ * @async
+ * @returns {Promise<void>}
+ */
+const copyContent = async () => {
+  return props.content
+};
 </script>
 
 
 <style lang="scss" scoped>
 .message-group {
-  margin-top:20px;
+  width: 100%;
+  margin-top: 20px;
   display: flex;
-  align-items: flex-start;
-  flex-direction: row-reverse;
 
   .avatar {
+    margin-right: 6px;
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -58,13 +83,13 @@ const formattedContent = computed(() => {
   }
 
   .message {
+    flex: 1;
     position: relative;
 
     .message-content {
       position: relative;
       padding: 4px 8px;
-      border-radius: 8px 0 8px 8px;
-      max-width: 96%;
+      border-radius: 0 8px 8px 8px;
       border: 1px solid;
       border-color: #e5e7eb;
       background: $white;
