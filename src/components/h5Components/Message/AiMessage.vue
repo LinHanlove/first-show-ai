@@ -165,10 +165,7 @@ const copyContent = async () => {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color: #d1d5db; // Light mode
-      @media (prefers-color-scheme: dark) {
-        background-color: #6b7280; // Dark mode
-      }
+      background-color: #d1d5db; 
       animation: typing 1.4s infinite both;
 
       &:nth-child(2) {

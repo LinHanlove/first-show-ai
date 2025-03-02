@@ -1,5 +1,3 @@
-import { AI_NAME_TYPE } from "../type";
-
 /**
  * AI 提供商接口
  * 定义了所有 AI 提供商必须实现的方法
