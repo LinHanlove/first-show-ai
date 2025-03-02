@@ -14,7 +14,7 @@ export const AI_MODELS = {
  */
 export const AI_CONFIG = {
   /** 是否展示流式输出 */
-  stream: true,
+  stream: false,
   /** 当前使用的 AI 提供商 */
   provider: import.meta.env.VITE_AI_PROVIDER || "openai",
   /** 温度参数，控制响应的随机性 */

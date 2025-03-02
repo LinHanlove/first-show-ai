@@ -1,16 +1,12 @@
 <template>
   <div class="message-group">
     <div class="avatar" :class="{ 'animate-pulse': loading }">
-      <Icon 
-        v-if="!loading"
-        icon="fluent:bot-24-filled"
-        width="16" 
-      />
-      <Icon 
+      <Icon v-if="!loading" icon="fluent:bot-24-filled" width="16" />
+      <Icon
         v-else
-        icon="svg-spinners:pulse-3" 
+        icon="svg-spinners:pulse-3"
         class="text-blue-500"
-        width="16" 
+        width="16"
       />
     </div>
     <div class="message">
@@ -30,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon } from "@iconify/vue";
 
 /**
  * 用户消息组件属性
@@ -40,6 +36,8 @@ interface Props {
   content: string;
   /** 消息时间 */
   time: string;
+  /** 是否正在加载 */
+  loading: boolean;
 }
 
 const props = defineProps<Props>();
@@ -49,7 +47,7 @@ const props = defineProps<Props>();
  * @returns {string} 格式化后的 HTML 字符串
  */
 const formattedContent = computed(() => {
-  return props.content
+  return props.content;
 });
 
 /**
@@ -58,10 +56,9 @@ const formattedContent = computed(() => {
  * @returns {Promise<void>}
  */
 const copyContent = async () => {
-  return props.content
+  return props.content;
 };
 </script>
-
 
 <style lang="scss" scoped>
 .message-group {
@@ -75,7 +72,7 @@ const copyContent = async () => {
     height: 24px;
     border-radius: 50%;
     border: 1px solid;
-    border-color: #e5e7eb; 
+    border-color: #e5e7eb;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,7 +123,8 @@ const copyContent = async () => {
         font-size: 14px;
       }
 
-      ul, ol {
+      ul,
+      ol {
         padding-left: 24px;
         margin: 8px 0;
         li {
@@ -158,5 +156,39 @@ const copyContent = async () => {
       opacity: 60%;
     }
   }
+
+  .typing-dots {
+    display: inline-flex;
+    gap: 4px;
+
+    span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #d1d5db; // Light mode
+      @media (prefers-color-scheme: dark) {
+        background-color: #6b7280; // Dark mode
+      }
+      animation: typing 1.4s infinite both;
+
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+
+  @keyframes typing {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
 }
-</style> 
+</style>

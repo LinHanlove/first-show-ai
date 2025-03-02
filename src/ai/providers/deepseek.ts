@@ -6,7 +6,7 @@ import { AI_MODELS, AI_CONFIG } from "../config";
  * @implements {AIProvider}
  */
 export class DeepSeekProvider implements AIProvider {
-  name: "DeepSeek";
+  name = "DeepSeek";
 
   /**
    * 发送聊天请求到 DeepSeek API

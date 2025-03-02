@@ -6,7 +6,7 @@ import { AI_NAME_TYPE } from "../type";
  */
 export interface AIProvider {
   /** 提供商名称 */
-  name: AI_NAME_TYPE;
+  name: string;
 
   /**
    * 发送聊天消息并获取响应

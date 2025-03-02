@@ -46,6 +46,7 @@ const formattedContent = computed(() => {
   flex-direction: row-reverse;
 
   .avatar {
+    margin-left: 6px;
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -59,7 +60,7 @@ const formattedContent = computed(() => {
 
   .message {
     position: relative;
-
+    min-width: 80px;
     .message-content {
       position: relative;
       padding: 4px 8px;

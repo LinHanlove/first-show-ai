@@ -19,7 +19,7 @@
           v-else
           :content="msg.content"
           :time="msg.time"
-          :loading="loading && index === messages.length - 1"
+          :loading="loading && index === messageList.length - 1"
         />
       </template>
     </div>
@@ -39,7 +39,7 @@
       </div>
       <div class="send flex items-center justify-between">
         <div class="tool-bar">
-          <ChatToolbar/>
+          <ChatToolbar />
         </div>
         <div class="send-btn flex items-center justify-center" @click="onSend">
           <van-icon name="guide-o" color="#fff" />
@@ -51,62 +51,78 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import AiMessage from '@/components/h5Components/Message/AiMessage.vue'
-import UserMessage from '@/components/h5Components/Message/UserMessage.vue'
-import ChatToolbar from '@/components/h5Components/ChatToolbar/index.vue'
+import { Icon } from "@iconify/vue";
+import AiMessage from "@/components/h5Components/Message/AiMessage.vue";
+import UserMessage from "@/components/h5Components/Message/UserMessage.vue";
+import ChatToolbar from "@/components/h5Components/ChatToolbar/index.vue";
+import { chat } from "@/ai/chat.ts";
+
 // 消息
 const message = ref("");
 
+const loading = ref(false);
+
 const messageList = ref([
   {
-    type: 'ai',
-    content: '你好！我是首展客服',
-    time: new Date().toLocaleTimeString('zh-CN', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    })
+    type: "ai",
+    content: "你好！我是首展客服",
+    time: new Date().toLocaleTimeString("zh-CN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
   },
-  {
-    type: 'user',
-    content: '你好！我是首展客服',
-    time: new Date().toLocaleTimeString('zh-CN', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    })
-  }
 ]);
 
 /**
  * @function 点击发送消息
  */
-const onSend = () =>{
-  if(message.value === '') return;
+const onSend = async () => {
+  if (message.value === "") return;
+  const content = message.value;
   messageList.value.push({
-    type: 'user',
+    type: "user",
     content: message.value,
-    time: new Date().toLocaleTimeString('zh-CN', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    })
+    time: new Date().toLocaleTimeString("zh-CN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
   });
-  message.value = '';
-  // 模拟发送消息
-  setTimeout(() => {
+
+  message.value = "";
+
+  try {
+    loading.value = true;
+
+    // 添加一个空的 AI 消息占位符
     messageList.value.push({
       type: 'ai',
-      content: '你好！我是首展客服',
+      content: '',
       time: new Date().toLocaleTimeString('zh-CN', { 
-        hour: '2-digit',
-         minute: '2-digit' 
+        hour: '2-digit', 
+        minute: '2-digit' 
       })
     });
-  }, 1000);
-
-}
-
+    
+    const response = await chat(content);
+    console.log("接收消息--->", response);
+    messageList.value[messageList.value.length - 1].content = response; // 更新最后一条 AI 消息
+   
+  } catch (error) {
+    console.error("Chat error:", error);
+    messageList.value.push({
+      type: "ai",
+      content: "抱歉，发生了一些错误，请稍后再试。",
+      time: new Date().toLocaleTimeString("zh-CN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    });
+  } finally {
+    loading.value = false;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

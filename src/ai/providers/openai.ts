@@ -6,7 +6,7 @@ import { AI_MODELS, AI_CONFIG } from "../config";
  * @implements {AIProvider}
  */
 export class OpenAIProvider implements AIProvider {
-  name: "OpenAI";
+  name = "OpenAI";
 
   /**
    * 发送聊天请求到 OpenAI API
