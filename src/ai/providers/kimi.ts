@@ -1,5 +1,5 @@
 import { AIProvider } from "./types";
-import { AI_MODELS, AI_CONFIG } from "../config";
+import { getRequestBody } from "./factory";
 
 /**
  * Kimi AI 提供商实现
@@ -24,16 +24,7 @@ export class KimiProvider implements AIProvider {
           "Content-Type": "application/json",
           Authorization: `Bearer ${import.meta.env.VITE_KIMI_API_KEY}`,
         },
-        body: JSON.stringify({
-          model: AI_MODELS.KIMI_MOONSHOT_128K,
-          messages: [
-            {
-              role: "user",
-              content: message,
-            },
-          ],
-          temperature: AI_CONFIG.temperature,
-        }),
+        body: JSON.stringify(getRequestBody(this.name, message)),
       }
     );
 

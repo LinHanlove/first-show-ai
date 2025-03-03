@@ -26,10 +26,8 @@ export class OpenAIProvider implements AIProvider {
         body: JSON.stringify({
           model: AI_MODELS.GPT35,
           messages: [
-            {
-              role: "user",
-              content: message,
-            },
+            { role: "system", content: prompt },
+            { role: "user", content: message },
           ],
           stream: AI_CONFIG.stream,
           temperature: AI_CONFIG.temperature,
