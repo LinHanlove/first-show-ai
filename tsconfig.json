@@ -1,4 +1,5 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": [
     "src/**/*",
     "src/**/*.ts",
@@ -26,7 +27,7 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

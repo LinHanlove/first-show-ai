@@ -19,6 +19,21 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   console.log("VITE_DROP_CONSOLE---->", VITE_DROP_CONSOLE);
 
   return {
+    build: {
+      target: "esnext", // 'modules', // 'es2020',
+      cssTarget: "chrome79",
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          chunkFileNames: "js/[name]-[hash].js", // 引入文件名的名称
+          entryFileNames: "js/[name]-[hash].js", // 包的入口文件名称
+          assetFileNames: "[ext]/[name]-[hash].[ext]", // 资源文件像 字体，图片等
+          manualChunks: {
+            vue: ["vue", "vue-router"],
+          },
+        },
+      },
+    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -30,14 +45,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       vue(),
       AutoImport({
         // 自动导入 Icon 组件
-        imports: [
-          "vue",
-          "vue-router",
-          {
-            "unplugin-icons/vue": ["Icon"], // 全局注册 Icon 组件
-          },
-        ],
-        resolvers: [IconsResolver()],
+        imports: ["vue", "vue-router"],
         eslintrc: {
           enabled: false,
           filepath: "./.eslintrc-auto-import.json",
